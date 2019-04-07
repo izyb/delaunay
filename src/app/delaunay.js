@@ -1,6 +1,6 @@
 const DelaunayTriangulator = (() => {
   // Configs
-  const POINT_RATE = 0.01;
+  const POINT_RATE = 0.03;
   const BLUR_KERNEL_DIMS = 5;
   const EDGE_KERNEL_DIMS = 5;
 
@@ -79,7 +79,7 @@ const DelaunayTriangulator = (() => {
 
     return new ImageData(blurredData, width, height);
   }
-  
+
   /**
    * Returns true if path through input points forms a ccw turn.
    * @param {Array<number>} p1 - Beginning of path.
@@ -89,7 +89,7 @@ const DelaunayTriangulator = (() => {
   const ccw = (p1, p2, p3) => {
     return (p2[1] - p1[1]) * (p3[0] - p1[0]) - (p3[1] - p1[1]) * (p2[0] - p1[0]) > 0;
   }
-    
+
   /**
    * Returns true if edges share endpoints.
    * @param {Array<Array<number>>} a - Edge 1.
@@ -230,7 +230,6 @@ const DelaunayTriangulator = (() => {
 
       // Init draw
       targetCtx.drawImage(image, 0, 0, width, height);
-
       const imageData = targetCtx.getImageData(0, 0, width, height);
 
       const grayScaleData = grayScale(imageData);
