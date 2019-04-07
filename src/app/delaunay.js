@@ -235,13 +235,15 @@ const DelaunayTriangulator = (() => {
         trianglePoints[i] = points[j];
         points.splice(j, 1);
       }
-      const triangles = this.generatePoints(trianglePoints, imageData);
-      targetCtx.putImageData(edgeData, 0, 0);
 
-      targetCtx.fillStyle = 'blue';
-      points.forEach(p => targetCtx.fillRect(p[0], p[1], 1, 1));
+      const triangles = this.generateTriangles(trianglePoints, imageData);
+      // targetCtx.putImageData(edgeData, 0, 0);
 
-      this.drawTrianglesAnimated(triangles, imageData);
+      // targetCtx.fillStyle = 'blue';
+      // points.forEach(p => targetCtx.fillRect(p[0], p[1], 1, 1));
+
+      // this.drawTrianglesAnimated(triangles, imageData);
+      this.drawTriangles(triangles, imageData);
     }
 
     /**
@@ -249,7 +251,7 @@ const DelaunayTriangulator = (() => {
      * @param {Array} points - Array of triangle vertices.
      * @param {ImageData} imageData - original image ImageData object.
      */
-    generatePoints(points, imageData) {
+    generateTriangles(points, imageData) {
       const {
         width,
         height
@@ -309,6 +311,9 @@ const DelaunayTriangulator = (() => {
             count += 1;
           }
         }
+      }
+      if (sum[0] === 0 && sum[1] === 0 && sum[2] === 0) {
+        return this.getTriangleColorQuick(t, imageData);
       }
       return `rgb(${sum.map(s => s / count | 0).join(', ')})`;
     }
