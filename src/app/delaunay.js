@@ -1,6 +1,5 @@
 const DelaunayTriangulator = (() => {
   // Configs
-  const POINT_RATE = 0.03;
   const BLUR_KERNEL_DIMS = 5;
   const EDGE_KERNEL_DIMS = 5;
 
@@ -164,11 +163,12 @@ const DelaunayTriangulator = (() => {
    * Generates and renders Delaunay triangulations of input image.
    */
   class Delaunay {
-    constructor(img, target) {
+    constructor(img, target, pointRate) {
       this.img = img;
       this.target = target;
       this.appendedCanvas = null;
       this.targetCtx = null;
+      this.POINT_RATE = pointRate || 0.03
     }
 
     /**
@@ -211,6 +211,7 @@ const DelaunayTriangulator = (() => {
       const {
         image,
         targetCtx,
+        POINT_RATE,
       } = this;
 
       const {
