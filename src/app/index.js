@@ -1,5 +1,4 @@
 let delaunay;
-let timeoutId;
 const canvas = document.getElementById('canvas');
 const img = document.getElementById('before-img');
 const fileUpload = document.getElementById('file-upload');
