@@ -169,16 +169,6 @@ const DelaunayTriangulator = (() => {
       this.target = target;
       this.appendedCanvas = null;
       this.targetCtx = null;
-
-      // Debounce resize handler
-      let timeoutId;
-      window.addEventListener('resize', () => {
-        window.clearTimeout(timeoutId);
-        timeoutId = window.setTimeout(() => {
-          this.initCtx();
-          this.generate();
-        }, 300);
-      });
     }
 
     /**
