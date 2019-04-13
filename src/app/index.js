@@ -1,5 +1,5 @@
 let delaunay;
-let pixelationTimeout;
+let renderTimeout;
 
 const handleFiles = (e) => {
   const reader = new FileReader();
@@ -12,18 +12,26 @@ const handleFiles = (e) => {
 
 const handlePixelation = (e) => {
   if (delaunay) {
-    window.clearTimeout(pixelationTimeout);
-    pixelationTimeout = window.setTimeout(() => {
-      delaunay.POINT_RATE = 0.01 * e.target.value;
-      delaunay.generate();
-    }, 100);
+    delaunay.POINT_RATE = 0.01 * e.target.value;
+    render();
   }
+}
+
+const handleRetry = () => {
+  render();
+}
+
+const render = () => {
+  window.clearTimeout(renderTimeout);
+  renderTimeout = window.setTimeout(() => {
+    delaunay.generate();
+  }, 100);
 }
 
 const onLoad = (img) => {
   delaunay = new DelaunayTriangulator.Delaunay(img, canvas);
   delaunay.initCtx();
-  delaunay.generate();
+  render();
 }
 
 // Declare elements
@@ -31,6 +39,7 @@ const img = document.getElementById('before-img');
 const canvas = document.getElementById('canvas');
 const fileUpload = document.getElementById('file-upload');
 const pixelationSlider = document.getElementById('pixelation');
+const retryButton = document.getElementById('retry');
 
 // Event Listeners
 window.addEventListener('load', () => {
@@ -38,5 +47,5 @@ window.addEventListener('load', () => {
 });
 
 fileUpload.addEventListener('change', handleFiles);
-
+retryButton.addEventListener('click', handleRetry)
 pixelationSlider.addEventListener('change', handlePixelation);

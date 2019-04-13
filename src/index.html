@@ -55,7 +55,7 @@
   <div id="container">
     <div id="side-by-side">
       <div>
-        <img id="before-img" src="myself_cropped.png">
+        <img id="before-img" src="default.jpg">
       </div>
       <div>
         <canvas id="canvas"></canvas>
@@ -63,7 +63,8 @@
     </div>
     <div id="control-panel">
       <input type="file" id="file-upload">
-      <input type="range" id="pixelation" min="1" max="10" value="5">
+      <input type="range" id="pixelation" min="1" max="10" value="5" autocomplete="off">
+      <input type="button" id="retry" value="Retry">
     </div>
   </div>
   <script src="./app/delaunay.js"></script>
